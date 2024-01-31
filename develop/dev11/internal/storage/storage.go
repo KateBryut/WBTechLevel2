@@ -1,8 +1,9 @@
 package storage
 
 import (
-	"dev11/internal/models"
 	"time"
+
+	"dev11/internal/models"
 )
 
 type Storager interface {

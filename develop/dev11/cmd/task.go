@@ -2,14 +2,15 @@ package main
 
 import (
 	"context"
-	"dev11/internal/config"
-	"dev11/internal/server"
-	"dev11/internal/server/handler"
-	"dev11/internal/storage"
 	"log"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"dev11/internal/config"
+	"dev11/internal/server"
+	"dev11/internal/server/handler"
+	"dev11/internal/storage"
 )
 
 /*

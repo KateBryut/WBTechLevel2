@@ -2,10 +2,11 @@ package server
 
 import (
 	"context"
-	"dev11/internal/config"
 	"fmt"
 	"net/http"
 	"time"
+
+	"dev11/internal/config"
 )
 
 type Server struct {

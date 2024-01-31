@@ -1,10 +1,11 @@
 package handler
 
 import (
-	"dev11/internal/models"
 	"fmt"
 	"net/http"
 	"time"
+
+	"dev11/internal/models"
 )
 
 func parceCreateEventRequest(w http.ResponseWriter, r *http.Request) (string, models.Event, error) {
