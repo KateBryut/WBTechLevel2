@@ -1,5 +1,18 @@
 package main
 
+import (
+	"context"
+	"log"
+	"os"
+	"os/signal"
+	"syscall"
+
+	"dev11/internal/config"
+	"dev11/internal/server"
+	"dev11/internal/server/handler"
+	"dev11/internal/storage"
+)
+
 /*
 === HTTP server ===
 
@@ -24,4 +37,30 @@ package main
 
 func main() {
 
+	cfg, err := config.NewConfig()
+	if err != nil {
+		log.Fatalf("error initializing config: %s", err.Error())
+	}
+	repo, err := storage.NewMemoryStorage()
+	if err != nil {
+		log.Fatalf("error initializing storage: %s", err.Error())
+	}
+	handler := handler.NewHandler(repo)
+	srv := server.NewServer()
+	go func() {
+		if err := srv.Run(cfg, handler.InitRoutes()); err != nil {
+			log.Fatalf("error running server: %s", err.Error())
+		}
+	}()
+	log.Print("server is successfully started...")
+
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGTERM, syscall.SIGINT)
+	<-quit
+
+	log.Print("server is shutting down...")
+
+	if err := srv.Shutdown(context.Background()); err != nil {
+		log.Printf("error occured on server shutting down: %s", err.Error())
+	}
 }

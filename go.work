@@ -1,0 +1,11 @@
+go 1.19
+
+use (
+	./develop/dev01
+	./develop/dev02
+	./develop/dev03
+	./develop/dev04
+	./develop/dev05
+	./develop/dev09
+	./develop/dev11
+)
